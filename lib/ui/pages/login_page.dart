@@ -1,13 +1,12 @@
+import 'package:chatme/ui/pages/home_page.dart';
 import 'package:chatme/ui/pages/register_page.dart';
 import 'package:chatme/ui/widgets/auth_bottom_sheet.dart';
 import 'package:chatme/ui/widgets/my_button.dart';
 import 'package:chatme/ui/widgets/my_text_field.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/login';
@@ -82,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 16),
                       MyButton(
-                        onTap: () {},
+                        onTap: () => Get.toNamed(HomePage.routeName),
                         child: Center(
                           child: Text(
                             'LOGIN',

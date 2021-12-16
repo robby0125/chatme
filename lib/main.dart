@@ -1,3 +1,4 @@
+import 'package:chatme/ui/pages/home_page.dart';
 import 'package:chatme/ui/pages/login_page.dart';
 import 'package:chatme/ui/pages/register_page.dart';
 import 'package:chatme/ui/utils/styles.dart';
@@ -32,6 +33,7 @@ class ChatMe extends StatelessWidget {
       routes: {
         LoginPage.routeName: (_) => const LoginPage(),
         RegisterPage.routeName: (_) => const RegisterPage(),
+        HomePage.routeName: (_) => const HomePage(),
       },
     );
   }
