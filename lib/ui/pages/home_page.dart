@@ -1,3 +1,8 @@
+import 'dart:developer';
+
+import 'package:chatme/ui/pages/chat_room_page.dart';
+import 'package:chatme/ui/widgets/my_appbar_action_button.dart';
+import 'package:chatme/ui/widgets/my_rounded_body_container.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -17,118 +22,88 @@ class HomePage extends StatelessWidget {
           'ChatMe',
           style: GoogleFonts.jua(),
         ),
-        leading: IconButton(
+        leading: MyAppBarActionButton(
           onPressed: () {},
-          icon: Container(
-            width: 24,
-            height: 24,
-            decoration: const BoxDecoration(
-              color: Color(0xFF5676E7),
-              borderRadius: BorderRadius.all(
-                Radius.circular(4),
-              ),
-            ),
-            alignment: Alignment.center,
-            child: const Icon(
-              FontAwesomeIcons.bars,
-              size: 16,
-            ),
-          ),
+          icon: FontAwesomeIcons.bars,
         ),
         actions: [
-          IconButton(
+          MyAppBarActionButton(
             onPressed: () {},
-            icon: Container(
-              width: 24,
-              height: 24,
-              decoration: const BoxDecoration(
-                color: Color(0xFF5676E7),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(4),
-                ),
-              ),
-              alignment: Alignment.center,
-              child: const Icon(
-                FontAwesomeIcons.search,
-                size: 16,
-              ),
-            ),
+            icon: FontAwesomeIcons.search,
           ),
         ],
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(16),
-          ),
-        ),
-        clipBehavior: Clip.hardEdge,
+      body: MyRoundedBodyContainer(
         child: ListView.separated(
           padding: const EdgeInsets.all(16),
           itemCount: 20,
           itemBuilder: (context, index) {
-            return Row(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(24),
-                  ),
-                  child: Image.network(
-                    'https://i.kinja-img.com/gawker-media/image/upload/t_original/ijsi5fzb1nbkbhxa2gc1.png',
-                    width: 48,
-                    height: 48,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'John',
-                        style: Get.textTheme.bodyText1!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Hey there!',
-                        style: Get.textTheme.caption!.copyWith(
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.end,
+            return Material(
+              child: InkWell(
+                onTap: () => Get.toNamed(ChatRoomPage.routeName),
+                child: Row(
                   children: [
-                    Text(
-                      '10:45 AM',
-                      style: Get.textTheme.overline!.copyWith(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
+                    ClipRRect(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(24),
+                      ),
+                      child: Image.network(
+                        'https://i.kinja-img.com/gawker-media/image/upload/t_original/ijsi5fzb1nbkbhxa2gc1.png',
+                        width: 48,
+                        height: 48,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    const SizedBox(height: 4),
-                    CircleAvatar(
-                      radius: 8,
-                      backgroundColor: Get.theme.primaryColor,
-                      child: Text(
-                        '2',
-                        style: Get.textTheme.overline!.copyWith(
-                          color: Colors.white,
-                        ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'John',
+                            style: Get.textTheme.bodyText1!.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Hey there!',
+                            style: Get.textTheme.caption!.copyWith(
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
                       ),
+                    ),
+                    const SizedBox(width: 12),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          '10:45 AM',
+                          style: Get.textTheme.overline!.copyWith(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        CircleAvatar(
+                          radius: 8,
+                          backgroundColor: Get.theme.primaryColor,
+                          child: Text(
+                            '2',
+                            style: Get.textTheme.overline!.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
+              ),
             );
           },
           separatorBuilder: (context, index) {

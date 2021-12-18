@@ -1,3 +1,4 @@
+import 'package:chatme/ui/pages/chat_room_page.dart';
 import 'package:chatme/ui/pages/home_page.dart';
 import 'package:chatme/ui/pages/login_page.dart';
 import 'package:chatme/ui/pages/register_page.dart';
@@ -16,6 +17,7 @@ class ChatMe extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'ChatMe',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: const Color(0xFF4060D2),
         colorScheme: ColorScheme.fromSwatch().copyWith(
@@ -34,6 +36,7 @@ class ChatMe extends StatelessWidget {
         LoginPage.routeName: (_) => const LoginPage(),
         RegisterPage.routeName: (_) => const RegisterPage(),
         HomePage.routeName: (_) => const HomePage(),
+        ChatRoomPage.routeName: (_) => const ChatRoomPage(),
       },
     );
   }

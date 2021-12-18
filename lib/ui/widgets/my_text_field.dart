@@ -8,6 +8,9 @@ class MyTextField extends StatefulWidget {
   final String? _hintText;
   final Widget? _prefixIcon;
   final Widget? _suffixIcon;
+  final InputBorder? _border;
+  final Color? _fillColor;
+  final EdgeInsetsGeometry? _contentPadding;
 
   const MyTextField({
     Key? key,
@@ -16,11 +19,17 @@ class MyTextField extends StatefulWidget {
     String? hintText,
     Widget? prefixIcon,
     Widget? suffixIcon,
+    InputBorder? border,
+    Color? fillColor,
+    EdgeInsetsGeometry? contentPadding,
   })  : _controller = controller,
         _isPasswordField = isPasswordField,
         _hintText = hintText,
         _prefixIcon = prefixIcon,
         _suffixIcon = suffixIcon,
+        _border = border,
+        _fillColor = fillColor,
+        _contentPadding = contentPadding,
         super(key: key);
 
   @override
@@ -29,6 +38,11 @@ class MyTextField extends StatefulWidget {
 
 class _MyTextFieldState extends State<MyTextField> {
   bool _hidePassword = true;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +80,10 @@ class _MyTextFieldState extends State<MyTextField> {
             return widget._suffixIcon ?? const SizedBox.shrink();
           },
         ),
+        border: widget._border,
+        fillColor: widget._fillColor,
+        filled: widget._fillColor != null,
+        contentPadding: widget._contentPadding,
       ),
     );
   }
