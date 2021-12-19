@@ -82,23 +82,59 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
         ],
       ),
       body: MyRoundedBodyContainer(
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: Center(
-                  child: Text(
-                    'No Message',
-                    style: Get.textTheme.bodyText1!.copyWith(
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: ListView.separated(
+                padding: const EdgeInsets.all(8),
+                itemBuilder: (context, index) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: index % 2 == 0
+                        ? CrossAxisAlignment.end
+                        : CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: index % 2 == 0
+                              ? const Color(0xFF5676E7)
+                              : _customGrey,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(index % 2 == 0 ? 16 : 0),
+                            topRight: Radius.circular(index % 2 == 0 ? 0 : 16),
+                            bottomLeft: const Radius.circular(16),
+                            bottomRight: const Radius.circular(16),
+                          ),
+                        ),
+                        child: Text(
+                          index % 2 == 0 ? 'Have a good day! 😘' : 'You too! 😊',
+                          style: Get.textTheme.bodyText1!.copyWith(
+                            color: index % 2 == 0 ? Colors.white : Colors.black,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        '10:45 AM',
+                        style: Get.textTheme.overline!.copyWith(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(height: 8);
+                },
+                itemCount: 2,
               ),
-              const SizedBox(height: 4),
-              Row(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
                 children: [
                   Expanded(
                     child: SizedBox(
@@ -148,8 +184,8 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
