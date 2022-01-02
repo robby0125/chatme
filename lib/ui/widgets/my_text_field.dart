@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 class MyTextField extends StatefulWidget {
   final TextEditingController _controller;
+  final String? Function(String? value)? _validator;
   final bool _isPasswordField;
   final String? _hintText;
   final Widget? _prefixIcon;
@@ -15,6 +16,7 @@ class MyTextField extends StatefulWidget {
   const MyTextField({
     Key? key,
     required TextEditingController controller,
+    String? Function(String? value)? validator,
     bool isPasswordField = false,
     String? hintText,
     Widget? prefixIcon,
@@ -23,6 +25,7 @@ class MyTextField extends StatefulWidget {
     Color? fillColor,
     EdgeInsetsGeometry? contentPadding,
   })  : _controller = controller,
+        _validator = validator,
         _isPasswordField = isPasswordField,
         _hintText = hintText,
         _prefixIcon = prefixIcon,
@@ -54,12 +57,16 @@ class _MyTextFieldState extends State<MyTextField> {
 
     return TextFormField(
       controller: widget._controller,
+      validator: widget._validator,
       obscureText: widget._isPasswordField ? _hidePassword : false,
       style: Get.textTheme.bodyText1,
       decoration: InputDecoration(
         hintText: widget._hintText,
         hintStyle: Get.textTheme.bodyText1!.copyWith(
           color: Colors.grey,
+        ),
+        errorStyle: Get.textTheme.caption!.copyWith(
+          color: Colors.red,
         ),
         prefixIcon: widget._prefixIcon,
         suffixIcon: Builder(

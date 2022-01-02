@@ -1,4 +1,4 @@
-package com.robby.chatme.chatme
+package com.robby.chatme
 
 import io.flutter.embedding.android.FlutterActivity
 
