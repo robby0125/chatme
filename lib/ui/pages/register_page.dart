@@ -74,8 +74,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     return 'This field is required.';
                   } else if (!name.isValidName()) {
                     return 'Your name is invalid.';
-                  } else {
-                    return null;
                   }
                 },
                 hintText: 'Full Name',
@@ -89,8 +87,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     return 'This field is required.';
                   } else if (!userName.isValidUserName()) {
                     return 'Username is invalid.';
-                  } else {
-                    return null;
                   }
                 },
                 hintText: 'Username',
@@ -104,8 +100,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     return 'This field is required.';
                   } else if (!email.isValidEmail()) {
                     return 'Email is invalid.';
-                  } else {
-                    return null;
                   }
                 },
                 hintText: 'Email',
@@ -118,9 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   if (password == null || password.isEmpty) {
                     return 'This field is required.';
                   } else if (!password.isValidPassLength()) {
-                    return 'Password at least 6 character.';
-                  } else {
-                    return null;
+                    return 'Password at least 6 characters.';
                   }
                 },
                 isPasswordField: true,
@@ -140,8 +132,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     return 'This field is required.';
                   } else if (confirmPassword != _password) {
                     return 'Confirmation password is not the same.';
-                  } else {
-                    return null;
                   }
                 },
                 isPasswordField: true,

@@ -8,10 +8,9 @@ import 'package:get/get.dart';
 class AuthController extends GetxController {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final DatabaseController _databaseController = Get.find<DatabaseController>();
+  final _user = Rx<User?>(null);
 
-  User? _user;
-
-  User? get user => _user;
+  User? get user => _user.value;
 
   Future<void> login({
     required String email,
@@ -23,9 +22,9 @@ class AuthController extends GetxController {
         password: password,
       );
 
-      _user = _userCredential.user;
+      _user.value = _userCredential.user;
 
-      if (_user != null) {
+      if (user != null) {
         Get.clearRouteTree();
         Get.toNamed(HomePage.routeName);
       }

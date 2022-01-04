@@ -1,4 +1,5 @@
-import 'package:chatme/ui/pages/home_page.dart';
+import 'package:chatme/core/controllers/auth_controller.dart';
+import 'package:chatme/core/extensions/auth_validator.dart';
 import 'package:chatme/ui/pages/register_page.dart';
 import 'package:chatme/ui/widgets/auth_bottom_sheet.dart';
 import 'package:chatme/ui/widgets/my_button.dart';
@@ -18,6 +19,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _authController = Get.find<AuthController>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _bottomSheetHeight = 56.0;
@@ -48,17 +51,32 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Form(
+                  key: _formKey,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       MyTextField(
                         controller: _emailController,
+                        validator: (email) {
+                          if (email == null || email.isEmpty) {
+                            return 'This field is required.';
+                          } else if (!email.isValidEmail()) {
+                            return 'Email is invalid.';
+                          }
+                        },
                         hintText: 'Email',
                         prefixIcon: const Icon(FontAwesomeIcons.solidEnvelope),
                       ),
                       const SizedBox(height: 16),
                       MyTextField(
                         controller: _passwordController,
+                        validator: (password) {
+                          if (password == null || password.isEmpty) {
+                            return 'This field is required.';
+                          } else if (!password.isValidPassLength()) {
+                            return 'Password at least 6 characters.';
+                          }
+                        },
                         isPasswordField: true,
                         hintText: 'Password',
                         prefixIcon: const Icon(FontAwesomeIcons.lock),
@@ -81,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 16),
                       MyButton(
-                        onTap: () => Get.toNamed(HomePage.routeName),
+                        onTap: _login,
                         child: Center(
                           child: Text(
                             'LOGIN',
@@ -133,5 +151,14 @@ class _LoginPageState extends State<LoginPage> {
         actionCallback: () => Get.toNamed(RegisterPage.routeName),
       ),
     );
+  }
+
+  void _login() {
+    if (!_formKey.currentState!.validate()) return;
+
+    final _email = _emailController.text.trim();
+    final _password = _passwordController.text.trim();
+
+    _authController.login(email: _email, password: _password);
   }
 }
