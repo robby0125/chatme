@@ -26,7 +26,7 @@ class _$UserModelTearOff {
       required String userName,
       required String email,
       required String profilePictUrl,
-      bool isOnline = false}) {
+      bool isOnline = true}) {
     return _UserModel(
       fullName: fullName,
       userName: userName,
@@ -175,7 +175,7 @@ class _$_UserModel implements _UserModel {
       required this.userName,
       required this.email,
       required this.profilePictUrl,
-      this.isOnline = false});
+      this.isOnline = true});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);

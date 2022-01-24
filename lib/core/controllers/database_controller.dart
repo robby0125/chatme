@@ -8,6 +8,7 @@ class DatabaseController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> addNewUser({
+    required String uid,
     required String email,
     required String fullName,
     required String userName,
@@ -20,11 +21,21 @@ class DatabaseController extends GetxController {
         profilePictUrl: '',
       );
 
-      await _firestore.collection('user').add(_newUser.toJson());
+      await _firestore.collection('user').doc(uid).set(_newUser.toJson());
 
       log('Success adding new user to database!');
-    } catch(e) {
+    } catch (e) {
       log(e.toString());
     }
+  }
+
+  Future<void> setUserOnlineStatus({
+    required String userUid,
+    required bool isOnline,
+  }) async {
+    final _ref = _firestore.collection('user').doc(userUid);
+    await _ref.update({
+      'isOnline': isOnline,
+    });
   }
 }

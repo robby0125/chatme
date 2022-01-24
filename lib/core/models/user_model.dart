@@ -11,7 +11,7 @@ class UserModel with _$UserModel {
     required String userName,
     required String email,
     required String profilePictUrl,
-    @Default(false) bool isOnline,
+    @Default(true) bool isOnline,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

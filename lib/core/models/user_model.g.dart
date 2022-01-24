@@ -11,7 +11,7 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       userName: json['userName'] as String,
       email: json['email'] as String,
       profilePictUrl: json['profilePictUrl'] as String,
-      isOnline: json['isOnline'] as bool? ?? false,
+      isOnline: json['isOnline'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>

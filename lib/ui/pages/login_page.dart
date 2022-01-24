@@ -1,10 +1,12 @@
 import 'package:chatme/core/controllers/auth_controller.dart';
+import 'package:chatme/core/controllers/database_controller.dart';
 import 'package:chatme/core/extensions/auth_validator.dart';
 import 'package:chatme/ui/pages/register_page.dart';
 import 'package:chatme/ui/widgets/auth_bottom_sheet.dart';
 import 'package:chatme/ui/widgets/my_button.dart';
 import 'package:chatme/ui/widgets/my_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -20,9 +22,12 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+
   final _authController = Get.find<AuthController>();
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
   final _bottomSheetHeight = 56.0;
 
   @override
@@ -112,7 +117,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 16),
                       MyButton(
-                        onTap: () {},
+                        onTap: () {
+                          if (EasyLoading.isShow) return;
+                        },
                         color: Colors.white,
                         borderSide: BorderSide(
                           color: Get.theme.colorScheme.primary,
@@ -148,13 +155,17 @@ class _LoginPageState extends State<LoginPage> {
         bottomSheetHeight: _bottomSheetHeight,
         labelText: 'Don\'t have an account? ',
         actionText: 'Register here',
-        actionCallback: () => Get.toNamed(RegisterPage.routeName),
+        actionCallback: () {
+          if (EasyLoading.isShow) return;
+
+          Get.toNamed(RegisterPage.routeName);
+        },
       ),
     );
   }
 
   void _login() {
-    if (!_formKey.currentState!.validate()) return;
+    if (!_formKey.currentState!.validate() || EasyLoading.isShow) return;
 
     final _email = _emailController.text.trim();
     final _password = _passwordController.text.trim();
