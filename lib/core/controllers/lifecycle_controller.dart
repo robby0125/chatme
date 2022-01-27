@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chatme/core/controllers/auth_controller.dart';
 import 'package:chatme/core/controllers/database_controller.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +23,8 @@ class LifecycleController extends GetxController with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
+
+    if (_authController.user == null) return;
 
     switch (state) {
       case AppLifecycleState.paused:

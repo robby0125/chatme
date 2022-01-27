@@ -1,5 +1,4 @@
 import 'package:chatme/core/controllers/auth_controller.dart';
-import 'package:chatme/core/controllers/database_controller.dart';
 import 'package:chatme/core/extensions/auth_validator.dart';
 import 'package:chatme/ui/pages/register_page.dart';
 import 'package:chatme/ui/widgets/auth_bottom_sheet.dart';

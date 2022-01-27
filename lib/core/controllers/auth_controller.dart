@@ -73,6 +73,30 @@ class AuthController extends GetxController {
         dismissOnTap: false,
       );
 
+      final _userNameExist = await _databaseController.getUserByUserName(
+        userName: userName,
+      );
+
+      if (_userNameExist != null) {
+        EasyLoading.showError(
+          'Oops!\nThis user name is already exist, please choose another user name!',
+          duration: const Duration(seconds: 3),
+        );
+        return;
+      } else {
+        final _emailExist = await _databaseController.getUserByEmail(
+          email: email,
+        );
+
+        if (_emailExist != null) {
+          EasyLoading.showError(
+            'Oops!\nThis email is already exist, please choose another email!',
+            duration: const Duration(seconds: 3),
+          );
+          return;
+        }
+      }
+
       final _userCredential =
           await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,

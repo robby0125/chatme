@@ -38,4 +38,34 @@ class DatabaseController extends GetxController {
       'isOnline': isOnline,
     });
   }
+
+  Future<UserModel?> getUserByUserName({
+    required String userName,
+  }) async {
+    final _querySnapshot = await _firestore
+        .collection('user')
+        .where('userName', isEqualTo: userName)
+        .get();
+
+    if (_querySnapshot.docs.isNotEmpty) {
+      return UserModel.fromJson(_querySnapshot.docs.first.data());
+    } else {
+      return null;
+    }
+  }
+
+  Future<UserModel?> getUserByEmail({
+    required String email,
+  }) async {
+    final _querySnapshot = await _firestore
+        .collection('user')
+        .where('email', isEqualTo: email)
+        .get();
+
+    if (_querySnapshot.docs.isNotEmpty) {
+      return UserModel.fromJson(_querySnapshot.docs.first.data());
+    } else {
+      return null;
+    }
+  }
 }
